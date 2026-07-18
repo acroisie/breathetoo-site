@@ -3,86 +3,254 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BreatheToo — Breathwork &amp; cold exposure</title>
-<meta name="description" content="Guided breathing sessions with animated visuals, a voice coach in 12 languages, and cold exposure tracking. Free, private, no ads. Coming soon to the App Store.">
+<title>BreatheToo — Breathe. Hold. Let go.</title>
+<meta name="description" content="Guided breathwork and cold exposure. Four techniques, a voice coach in 12 languages, animated visuals. Free, private, no ads.">
 <link rel="icon" href="icon.png">
 <meta property="og:title" content="BreatheToo">
 <meta property="og:description" content="Breathe. Hold. Let go. Guided breathwork and cold exposure — free, private, no ads.">
 <meta property="og:image" content="https://breathetoo.com/icon.png">
 <style>
   :root {
-    --bg: #0c1526;
+    --bg: #0a1220;
     --bg2: #121f36;
+    --card: rgba(255,255,255,.055);
+    --border: rgba(255,255,255,.10);
     --text: #eef3fb;
     --muted: #9fb0c9;
     --teal: #5cc8c2;
+    --ice: #7fb8e8;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: radial-gradient(120% 120% at 50% 0%, var(--bg2) 0%, var(--bg) 70%);
+    background: var(--bg);
     color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 48px 24px 32px;
+    line-height: 1.6;
+    overflow-x: hidden;
   }
-  main { max-width: 640px; display: flex; flex-direction: column; align-items: center; flex: 1; }
-  .logo { width: 132px; height: 132px; border-radius: 30px; box-shadow: 0 18px 48px rgba(0,0,0,.45); }
-  h1 { font-size: 2.6rem; font-weight: 800; letter-spacing: -.02em; margin-top: 28px; }
-  .tagline { font-size: 1.25rem; color: var(--muted); margin-top: 10px; line-height: 1.5; }
-  .tagline strong { color: var(--teal); font-weight: 600; }
-  .badge {
-    display: inline-block; margin-top: 28px; padding: 12px 26px;
-    border: 1px solid rgba(255,255,255,.22); border-radius: 999px;
-    color: var(--text); font-weight: 600; font-size: .95rem;
-    background: rgba(255,255,255,.06);
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- nav ---------- */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 0;
   }
-  .features {
-    margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 12px; width: 100%;
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.05rem; }
+  .brand img { width: 34px; height: 34px; border-radius: 8px; }
+  .lang {
+    display: flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden;
+    font-size: .8rem;
   }
+  .lang button {
+    background: none; border: none; color: var(--muted); padding: 6px 14px;
+    cursor: pointer; font-weight: 600;
+  }
+  .lang button.on { background: rgba(255,255,255,.10); color: var(--text); }
+
+  /* ---------- hero ---------- */
+  header { position: relative; padding: 56px 0 40px; text-align: center; }
+  .orb {
+    position: absolute; left: 50%; top: -140px; transform: translateX(-50%);
+    width: 720px; height: 720px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(92,200,194,.16) 0%, rgba(127,184,232,.07) 45%, transparent 70%);
+    animation: breathe 7s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: translateX(-50%) scale(1); opacity: .8; }
+    50% { transform: translateX(-50%) scale(1.18); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) { .orb { animation: none; } }
+  h1 {
+    position: relative; font-size: clamp(2.4rem, 6vw, 3.6rem);
+    font-weight: 800; letter-spacing: -.02em; line-height: 1.15;
+  }
+  h1 .accent { color: var(--teal); }
+  .sub {
+    position: relative; margin: 18px auto 0; max-width: 560px;
+    font-size: 1.2rem; color: var(--muted);
+  }
+  .cta {
+    position: relative; display: inline-block; margin-top: 30px; padding: 13px 30px;
+    border-radius: 999px; font-weight: 700; font-size: .95rem;
+    color: #0a1220; background: linear-gradient(120deg, var(--teal), var(--ice));
+    box-shadow: 0 10px 34px rgba(92,200,194,.28);
+  }
+  .cta-note { position: relative; margin-top: 12px; font-size: .82rem; color: var(--muted); }
+  .hero-shot { position: relative; margin: 48px auto -8px; width: min(320px, 78vw); }
+  .hero-shot img {
+    width: 100%; height: auto; border-radius: 28px;
+    box-shadow: 0 30px 90px rgba(0,0,0,.55), 0 0 0 1px var(--border);
+  }
+
+  /* ---------- features ---------- */
+  section { padding: 72px 0 0; }
   .feature {
-    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09);
-    border-radius: 16px; padding: 16px 18px; font-size: .95rem; color: var(--muted);
-    line-height: 1.45;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    padding: 40px 0;
   }
-  .feature b { color: var(--text); display: block; margin-bottom: 4px; }
-  .shot { margin-top: 44px; max-width: 300px; width: 80%; }
-  .shot img { width: 100%; height: auto; border-radius: 24px; box-shadow: 0 24px 64px rgba(0,0,0,.5); }
-  footer { margin-top: 56px; font-size: .85rem; color: var(--muted); line-height: 2; }
+  .feature:nth-child(even) .shot { order: -1; }
+  .feature h2 { font-size: clamp(1.5rem, 3.4vw, 2rem); font-weight: 750; letter-spacing: -.01em; }
+  .feature h2 span { color: var(--teal); }
+  .feature.cold h2 span { color: var(--ice); }
+  .feature p { margin-top: 12px; color: var(--muted); font-size: 1.02rem; max-width: 44ch; }
+  .feature .shot { text-align: center; }
+  .feature .shot img {
+    width: min(300px, 70vw); height: auto; border-radius: 26px;
+    box-shadow: 0 24px 70px rgba(0,0,0,.5), 0 0 0 1px var(--border);
+  }
+  .chips { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: .8rem; color: var(--text); padding: 6px 12px; border-radius: 999px;
+    background: var(--card); border: 1px solid var(--border);
+  }
+  @media (max-width: 760px) {
+    .feature { grid-template-columns: 1fr; gap: 28px; text-align: center; }
+    .feature:nth-child(even) .shot { order: 0; }
+    .feature p { margin-left: auto; margin-right: auto; }
+    .chips { justify-content: center; }
+  }
+
+  /* ---------- privacy strip ---------- */
+  .privacy {
+    margin: 88px 0 0; padding: 34px 28px; border-radius: 22px;
+    background: linear-gradient(160deg, rgba(92,200,194,.10), rgba(127,184,232,.06));
+    border: 1px solid var(--border); text-align: center;
+  }
+  .privacy h3 { font-size: 1.25rem; font-weight: 750; }
+  .privacy p { margin-top: 8px; color: var(--muted); font-size: .95rem; }
+
+  /* ---------- footer ---------- */
+  footer {
+    margin-top: 72px; padding: 36px 0 44px; border-top: 1px solid var(--border);
+    text-align: center; font-size: .85rem; color: var(--muted); line-height: 2.1;
+  }
   footer a { color: var(--teal); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
-  .fr { margin-top: 6px; font-size: 1rem; color: var(--muted); font-style: italic; }
 </style>
 </head>
 <body>
-<main>
-  <img class="logo" src="icon.png" alt="BreatheToo app icon">
-  <h1>BreatheToo</h1>
-  <p class="tagline">Breathe. Hold. Let&nbsp;go.<br>
-     Guided breathwork and cold exposure — <strong>free, private, no ads</strong>.</p>
-  <p class="fr">Respire. Retiens. Relâche.</p>
-  <span class="badge">Coming soon to the App&nbsp;Store</span>
+<div class="wrap">
+  <nav>
+    <div class="brand"><img src="icon.png" alt=""> BreatheToo</div>
+    <div class="lang" role="group" aria-label="Language">
+      <button id="lang-en" class="on" onclick="setLang('en')">EN</button>
+      <button id="lang-fr" onclick="setLang('fr')">FR</button>
+    </div>
+  </nav>
 
-  <div class="features">
-    <div class="feature"><b>Four techniques</b>Power Breathing, cardiac coherence, box breathing and 4-7-8 — or build your own.</div>
-    <div class="feature"><b>Voice coach</b>Sensorial guidance in 12 languages, synced to every phase of your session.</div>
-    <div class="feature"><b>Cold exposure</b>Time your cold showers and ice baths, track your progress over time.</div>
-    <div class="feature"><b>Private by design</b>No account required, no tracking, no analytics. Your data stays on your device and iCloud.</div>
+  <header>
+    <div class="orb" aria-hidden="true"></div>
+    <h1 data-i18n="heroTitle">Breathe. Hold. <span class="accent">Let&nbsp;go.</span></h1>
+    <p class="sub" data-i18n="heroSub">Guided breathwork and cold exposure, with animated visuals and a voice that carries you through every phase.</p>
+    <span class="cta" data-i18n="cta">Coming soon to the App&nbsp;Store</span>
+    <div class="cta-note" data-i18n="ctaNote">Free · No ads · No subscription</div>
+    <div class="hero-shot"><img data-shot="03_session" src="shots/en/03_session.png" alt="An active breathing session in BreatheToo" loading="eager"></div>
+  </header>
+
+  <section>
+    <div class="feature">
+      <div>
+        <h2 data-i18n="f1Title">Four techniques.<br><span>Or build your own.</span></h2>
+        <p data-i18n="f1Body">Power Breathing, cardiac coherence, box breathing and 4-7-8 — every rhythm, round and duration is yours to shape.</p>
+        <div class="chips">
+          <span class="chip">Power Breathing</span>
+          <span class="chip" data-i18n="chipCoherence">Cardiac coherence</span>
+          <span class="chip" data-i18n="chipBox">Box breathing</span>
+          <span class="chip">4-7-8</span>
+        </div>
+      </div>
+      <div class="shot"><img data-shot="02_builder" src="shots/en/02_builder.png" alt="The session builder" loading="lazy"></div>
+    </div>
+
+    <div class="feature">
+      <div>
+        <h2 data-i18n="f2Title">A voice that <span>guides you.</span></h2>
+        <p data-i18n="f2Body">A sensorial voice coach accompanies your breathing and retention — never technical, always present. In 12 languages, with haptics that let you close your eyes.</p>
+        <div class="chips">
+          <span class="chip" data-i18n="chipLangs">12 languages</span>
+          <span class="chip" data-i18n="chipHaptics">Haptic guidance</span>
+          <span class="chip" data-i18n="chipVisuals">Animated visuals</span>
+        </div>
+      </div>
+      <div class="shot"><img data-shot="01_home" src="shots/en/01_home.png" alt="The BreatheToo home screen" loading="lazy"></div>
+    </div>
+
+    <div class="feature cold">
+      <div>
+        <h2 data-i18n="f3Title">Cold, <span>on your terms.</span></h2>
+        <p data-i18n="f3Body">Time your cold showers and ice baths, keep your streak alive, and watch your tolerance grow session after session.</p>
+      </div>
+      <div class="shot"><img data-shot="04_cold" src="shots/en/04_cold.png" alt="The cold exposure timer" loading="lazy"></div>
+    </div>
+
+    <div class="feature">
+      <div>
+        <h2 data-i18n="f4Title">See yourself <span>progress.</span></h2>
+        <p data-i18n="f4Body">Retention records, streaks and history at a glance — and every session saved to Apple Health as mindful minutes.</p>
+        <div class="chips">
+          <span class="chip">Apple Health</span>
+          <span class="chip" data-i18n="chipIcloud">iCloud sync</span>
+        </div>
+      </div>
+      <div class="shot"><img data-shot="05_progress" src="shots/en/05_progress.png" alt="Progress and history" loading="lazy"></div>
+    </div>
+  </section>
+
+  <div class="privacy">
+    <h3 data-i18n="privTitle">Private by design</h3>
+    <p data-i18n="privBody">No account required. No tracking, no analytics, no third-party SDKs. Your data lives on your device and your iCloud — nowhere else.</p>
   </div>
 
-  <div class="shot">
-    <img src="screenshot.png" alt="A guided breathing session in BreatheToo, with the voice coach and animated visual" loading="lazy">
-  </div>
-</main>
-<footer>
-  <a href="https://acroisie.github.io/breathetoo-legal/support">Support</a> ·
-  <a href="https://acroisie.github.io/breathetoo-legal/privacy-policy">Privacy Policy</a> ·
-  <a href="mailto:contact@breathetoo.com">contact@breathetoo.com</a><br>
-  © 2026 Arnaud Croisier
-</footer>
+  <footer>
+    <a href="https://acroisie.github.io/breathetoo-legal/support" data-i18n="ftSupport">Support</a> ·
+    <a href="https://acroisie.github.io/breathetoo-legal/privacy-policy" data-i18n="ftPrivacy">Privacy Policy</a> ·
+    <a href="mailto:contact@breathetoo.com">contact@breathetoo.com</a><br>
+    © 2026 Arnaud Croisier
+  </footer>
+</div>
+
+<script>
+const I18N = {
+  fr: {
+    heroTitle: 'Respire. Retiens. <span class="accent">Relâche.</span>',
+    heroSub: 'Respiration guidée et exposition au froid, avec des visuels animés et une voix qui te porte à chaque phase.',
+    cta: 'Bientôt sur l’App Store',
+    ctaNote: 'Gratuit · Sans pub · Sans abonnement',
+    f1Title: 'Quatre techniques.<br><span>Ou crée la tienne.</span>',
+    f1Body: 'Power Breathing, cohérence cardiaque, respiration carrée et 4-7-8 — chaque rythme, round et durée se règle comme tu veux.',
+    chipCoherence: 'Cohérence cardiaque', chipBox: 'Respiration carrée',
+    f2Title: 'Une voix qui <span>te guide.</span>',
+    f2Body: 'Un coach vocal sensoriel accompagne ta respiration et ta rétention — jamais technique, toujours présent. En 12 langues, avec des haptiques qui te laissent fermer les yeux.',
+    chipLangs: '12 langues', chipHaptics: 'Guidage haptique', chipVisuals: 'Visuels animés',
+    f3Title: 'Le froid, <span>à ta mesure.</span>',
+    f3Body: 'Chronomètre tes douches froides et bains de glace, entretiens ta série, et regarde ta tolérance grandir séance après séance.',
+    f4Title: 'Regarde-toi <span>progresser.</span>',
+    f4Body: 'Records de rétention, séries et historique en un coup d’œil — et chaque séance enregistrée dans Apple Santé en minutes de pleine conscience.',
+    chipIcloud: 'Synchro iCloud',
+    privTitle: 'Privé par conception',
+    privBody: 'Aucun compte requis. Pas de tracking, pas d’analytics, pas de SDK tiers. Tes données vivent sur ton appareil et ton iCloud — nulle part ailleurs.',
+    ftSupport: 'Support', ftPrivacy: 'Politique de confidentialité',
+  },
+  en: null // source language lives in the markup
+};
+const EN_CACHE = {};
+document.querySelectorAll('[data-i18n]').forEach(el => { EN_CACHE[el.dataset.i18n] = el.innerHTML; });
+
+function setLang(lang) {
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    el.innerHTML = (lang === 'en') ? EN_CACHE[key] : (I18N.fr[key] ?? EN_CACHE[key]);
+  });
+  document.querySelectorAll('[data-shot]').forEach(img => {
+    img.src = 'shots/' + lang + '/' + img.dataset.shot + '.png';
+  });
+  document.getElementById('lang-en').classList.toggle('on', lang === 'en');
+  document.getElementById('lang-fr').classList.toggle('on', lang === 'fr');
+}
+if ((navigator.language || '').toLowerCase().startsWith('fr')) setLang('fr');
+</script>
 </body>
 </html>
