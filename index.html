@@ -18,7 +18,6 @@
     --teal: #5cc8c2;
     --ice: #7fb8e8;
     --border: rgba(255,255,255,.09);
-    --breath: 10s; /* 5s in, 5s out — coherence pace */
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -54,11 +53,11 @@
   }
   .lang button.on { background: rgba(255,255,255,.14); color: var(--text); }
 
-  /* ---------- hero : interactive breath ---------- */
+  /* ---------- hero ---------- */
   .hero {
-    min-height: 100svh; display: flex; flex-direction: column;
+    min-height: 62svh; display: flex; flex-direction: column;
     align-items: center; justify-content: center; text-align: center;
-    padding: 96px 24px 48px; position: relative;
+    padding: 130px 24px 24px; position: relative;
   }
   .hero h1 {
     font-size: clamp(2.5rem, 7vw, 4.2rem); font-weight: 800;
@@ -69,31 +68,7 @@
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .hero .sub { margin: 20px auto 0; max-width: 520px; font-size: 1.15rem; color: var(--muted); }
-
-  .breath-stage { position: relative; width: 280px; height: 280px; margin: 52px auto 0; }
-  .ring { position: absolute; inset: 0; border-radius: 50%; }
-  .ring.r1 { border: 1px solid rgba(92,200,194,.35); animation: orb var(--breath) ease-in-out infinite; }
-  .ring.r2 { inset: -26px; border: 1px solid rgba(92,200,194,.16); animation: orb var(--breath) ease-in-out infinite; animation-delay: -.35s; }
-  .ring.r3 { inset: -56px; border: 1px solid rgba(127,184,232,.09); animation: orb var(--breath) ease-in-out infinite; animation-delay: -.7s; }
-  .orb-core {
-    position: absolute; inset: 44px; border-radius: 50%;
-    background:
-      radial-gradient(circle at 38% 32%, rgba(255,255,255,.24), transparent 46%),
-      radial-gradient(circle, rgba(92,200,194,.85), rgba(64,140,170,.55) 62%, rgba(30,70,110,.35));
-    box-shadow: 0 0 90px rgba(92,200,194,.35), inset 0 0 40px rgba(255,255,255,.08);
-    animation: orb var(--breath) ease-in-out infinite;
-  }
-  @keyframes orb {
-    0%, 100% { transform: scale(.78); }
-    50% { transform: scale(1.06); }
-  }
-  .breath-label {
-    position: absolute; inset: 0; display: grid; place-items: center;
-    font-size: 1.05rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase;
-    color: rgba(255,255,255,.92); text-shadow: 0 1px 14px rgba(8,15,28,.6);
-  }
-  .breath-hint { margin-top: 40px; font-size: .85rem; color: var(--muted); letter-spacing: .02em; }
-  .cta-row { margin-top: 26px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .cta-row { margin-top: 32px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
   .cta {
     display: inline-block; padding: 13px 28px; border-radius: 999px;
     font-weight: 700; font-size: .95rem; color: #08131f;
@@ -105,11 +80,6 @@
     font-size: .95rem; color: var(--text); border: 1px solid var(--border);
     text-decoration: none; background: rgba(255,255,255,.04);
   }
-  @media (prefers-reduced-motion: reduce) {
-    .ring, .orb-core { animation: none; }
-    .orb-core { transform: scale(.95); }
-  }
-
   /* ---------- scroll story : sticky phone ---------- */
   .story { position: relative; padding: 40px 0 0; }
   .story-grid { display: grid; grid-template-columns: minmax(300px, 420px) 1fr; gap: clamp(40px, 7vw, 110px); }
@@ -168,20 +138,8 @@
     .step .mini-phone img { display: block; width: 100%; height: auto; }
   }
 
-  /* ---------- voice section ---------- */
-  .voice { padding: 14vh 0; text-align: center; position: relative; }
-  .voice .quote {
-    font-size: clamp(1.6rem, 4.5vw, 2.6rem); font-weight: 300; font-style: italic;
-    letter-spacing: -.01em; min-height: 2.6em; display: grid; place-items: center;
-    color: rgba(238,243,251,.92);
-  }
-  .voice .quote span { opacity: 0; transition: opacity 1.2s ease; position: absolute; max-width: 20ch; }
-  .voice .quote span.on { opacity: 1; }
-  .voice .who { margin-top: 8px; font-size: .85rem; color: var(--muted); letter-spacing: .05em; }
-  .voice .langs { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-
   /* ---------- privacy / final ---------- */
-  .privacy { padding: 8vh 0 4vh; }
+  .privacy { padding: 10vh 0 4vh; }
   .privacy-inner {
     border-radius: 26px; padding: 44px 32px; text-align: center;
     background: linear-gradient(165deg, rgba(92,200,194,.09), rgba(127,184,232,.05));
@@ -218,12 +176,6 @@
 <header class="hero">
   <h1 data-i18n="heroTitle">Breathe. Hold. <span class="accent">Let&nbsp;go.</span></h1>
   <p class="sub" data-i18n="heroSub">Guided breathwork and cold exposure, carried by a voice and visuals that let you close your eyes.</p>
-  <div class="breath-stage" aria-hidden="true">
-    <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
-    <div class="orb-core"></div>
-    <div class="breath-label" id="breathLabel">Breathe in</div>
-  </div>
-  <div class="breath-hint" data-i18n="breathHint">Follow the circle — you're already practicing.</div>
   <div class="cta-row">
     <span class="cta" data-i18n="cta">Coming soon to the App&nbsp;Store</span>
     <a class="cta-ghost" href="#story" data-i18n="ctaMore">Discover</a>
@@ -266,6 +218,7 @@
         <h2 data-i18n="f2Title">Close your eyes. The&nbsp;app follows you.</h2>
         <p data-i18n="f2Body">Animated visuals, haptic guidance and a sensorial voice coach carry you through every breath, retention and recovery — even on the lock screen.</p>
         <div class="chips">
+          <span class="chip" data-i18n="chipVoice">Voice coach in 12 languages</span>
           <span class="chip" data-i18n="chipVisuals">Animated visuals</span>
           <span class="chip" data-i18n="chipHaptics">Haptic guidance</span>
           <span class="chip" data-i18n="chipLive">Live Activity</span>
@@ -294,22 +247,6 @@
   </div>
 </div>
 
-<!-- ============ VOICE ============ -->
-<section class="voice wrap">
-  <div class="quote" id="voiceQuote" aria-live="off">
-    <span class="on">“Don’t analyze. Feel.”</span>
-    <span>“One more breath.”</span>
-    <span>“Let everything soften.”</span>
-  </div>
-  <div class="who" data-i18n="voiceWho">— the voice coach, in 12 languages</div>
-  <div class="langs">
-    <span class="chip">Français</span><span class="chip">English</span><span class="chip">Deutsch</span>
-    <span class="chip">Español</span><span class="chip">Italiano</span><span class="chip">日本語</span>
-    <span class="chip">한국어</span><span class="chip">Nederlands</span><span class="chip">Polski</span>
-    <span class="chip">Português</span><span class="chip">中文（简体）</span><span class="chip">中文（繁體）</span>
-  </div>
-</section>
-
 <!-- ============ PRIVACY + FINAL ============ -->
 <div class="wrap privacy reveal">
   <div class="privacy-inner">
@@ -336,7 +273,6 @@ const I18N = {
   fr: {
     heroTitle: 'Respire. Retiens. <span class="accent">Relâche.</span>',
     heroSub: 'Respiration guidée et exposition au froid, portées par une voix et des visuels qui te laissent fermer les yeux.',
-    breathHint: 'Suis le cercle — tu pratiques déjà.',
     cta: 'Bientôt sur l’App Store',
     ctaMore: 'Découvrir',
     k1: 'Ta pratique', k2: 'En séance', k3: 'Exposition au froid', k4: 'Progression',
@@ -345,24 +281,18 @@ const I18N = {
     chipCoherence: 'Cohérence cardiaque', chipBox: 'Respiration carrée',
     f2Title: 'Ferme les yeux. L’app te suit.',
     f2Body: 'Visuels animés, guidage haptique et un coach vocal sensoriel t’accompagnent à chaque respiration, rétention et récupération — même sur l’écran verrouillé.',
+    chipVoice: 'Coach vocal en 12 langues',
     chipVisuals: 'Visuels animés', chipHaptics: 'Guidage haptique', chipLive: 'Live Activity',
     f3Title: 'Le froid, à ta mesure.',
     f3Body: 'Chronomètre tes douches froides et bains de glace, entretiens ta série, et regarde ta tolérance grandir séance après séance.',
     f4Title: 'Regarde-toi progresser.',
     f4Body: 'Records de rétention, séries et historique en un coup d’œil — chaque séance enregistrée dans Apple Santé en minutes de pleine conscience, synchronisée par iCloud.',
     chipIcloud: 'Synchro iCloud',
-    voiceWho: '— le coach vocal, en 12 langues',
     privTitle: 'Gratuit. Privé. Sans pub.',
     privBody: 'Aucun compte requis, pas d’abonnement, pas de tracking, pas de SDK tiers. Tes données vivent sur ton appareil et ton iCloud — nulle part ailleurs.',
     finalTitle: 'Ta prochaine respiration commence ici.',
     ftSupport: 'Support', ftPrivacy: 'Politique de confidentialité',
-    breathIn: 'Inspire', breathOut: 'Expire',
-    quotes: ['« N’analyse pas. Ressens. »', '« Une dernière. »', '« Relâche tout. »'],
   },
-  en: {
-    breathIn: 'Breathe in', breathOut: 'Breathe out',
-    quotes: ['“Don’t analyze. Feel.”', '“One more breath.”', '“Let everything soften.”'],
-  }
 };
 const EN_CACHE = {};
 document.querySelectorAll('[data-i18n]').forEach(el => { EN_CACHE[el.dataset.i18n] = el.innerHTML; });
@@ -378,21 +308,10 @@ function setLang(lang) {
   document.querySelectorAll('img[data-screen]').forEach(img => {
     img.src = 'screens/' + lang + '/' + img.dataset.screen + '.png';
   });
-  document.querySelectorAll('#voiceQuote span').forEach((s, i) => { s.textContent = I18N[lang].quotes[i]; });
   document.getElementById('lang-en').classList.toggle('on', lang === 'en');
   document.getElementById('lang-fr').classList.toggle('on', lang === 'fr');
 }
 if ((navigator.language || '').toLowerCase().startsWith('fr')) setLang('fr');
-
-/* ---------- breath label, synced with the orb keyframes ---------- */
-const label = document.getElementById('breathLabel');
-const BREATH_MS = 10000;
-function tickBreath() {
-  const t = (performance.now() % BREATH_MS) / BREATH_MS;
-  label.textContent = I18N[LANG]['breath' + (t < .5 ? 'In' : 'Out')] ?? (t < .5 ? 'Breathe in' : 'Breathe out');
-  requestAnimationFrame(tickBreath);
-}
-if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(tickBreath);
 
 /* ---------- sticky phone screen swap ---------- */
 const screenImgs = document.querySelectorAll('#phoneScreen img');
@@ -418,15 +337,6 @@ const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObserver.unobserve(e.target); } });
 }, { threshold: .15 });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-/* ---------- voice quotes rotation ---------- */
-const quotes = document.querySelectorAll('#voiceQuote span');
-let qi = 0;
-setInterval(() => {
-  quotes[qi].classList.remove('on');
-  qi = (qi + 1) % quotes.length;
-  quotes[qi].classList.add('on');
-}, 4200);
 </script>
 </body>
 </html>
