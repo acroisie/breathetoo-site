@@ -11,148 +11,246 @@
 <meta property="og:image" content="https://breathetoo.com/icon.png">
 <style>
   :root {
-    --bg: #0a1220;
-    --bg2: #121f36;
-    --card: rgba(255,255,255,.055);
-    --border: rgba(255,255,255,.10);
+    --bg: #080f1c;
+    --bg2: #101b30;
     --text: #eef3fb;
-    --muted: #9fb0c9;
+    --muted: #93a5c0;
     --teal: #5cc8c2;
     --ice: #7fb8e8;
+    --border: rgba(255,255,255,.09);
+    --breath: 10s; /* 5s in, 5s out — coherence pace */
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    overflow-x: hidden;
+    background:
+      radial-gradient(90rem 60rem at 70% -10%, rgba(127,184,232,.07), transparent 60%),
+      radial-gradient(80rem 50rem at 10% 40%, rgba(92,200,194,.05), transparent 55%),
+      var(--bg);
+    color: var(--text); line-height: 1.6; overflow-x: hidden;
   }
-  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  body::after { /* grain */
+    content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .5; z-index: 3;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.02 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  ::selection { background: rgba(92,200,194,.35); }
 
   /* ---------- nav ---------- */
   nav {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 0;
+    position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 10;
+    display: flex; align-items: center; gap: 18px;
+    padding: 8px 10px 8px 16px; border-radius: 999px;
+    background: rgba(13,22,40,.55); border: 1px solid var(--border);
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
   }
-  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.05rem; }
-  .brand img { width: 34px; height: 34px; border-radius: 8px; }
-  .lang {
-    display: flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden;
-    font-size: .8rem;
-  }
+  .brand { display: flex; align-items: center; gap: 9px; font-weight: 700; font-size: .95rem; }
+  .brand img { width: 26px; height: 26px; border-radius: 7px; }
+  .lang { display: flex; gap: 2px; background: rgba(255,255,255,.06); border-radius: 999px; padding: 2px; }
   .lang button {
-    background: none; border: none; color: var(--muted); padding: 6px 14px;
-    cursor: pointer; font-weight: 600;
+    background: none; border: none; color: var(--muted); padding: 5px 12px; border-radius: 999px;
+    cursor: pointer; font-weight: 650; font-size: .78rem;
   }
-  .lang button.on { background: rgba(255,255,255,.10); color: var(--text); }
+  .lang button.on { background: rgba(255,255,255,.14); color: var(--text); }
 
-  /* ---------- hero ---------- */
-  header { position: relative; padding: 56px 0 40px; text-align: center; }
-  .orb {
-    position: absolute; left: 50%; top: -140px; transform: translateX(-50%);
-    width: 720px; height: 720px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(92,200,194,.16) 0%, rgba(127,184,232,.07) 45%, transparent 70%);
-    animation: breathe 7s ease-in-out infinite;
-    pointer-events: none;
+  /* ---------- hero : interactive breath ---------- */
+  .hero {
+    min-height: 100svh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    padding: 96px 24px 48px; position: relative;
   }
-  @keyframes breathe {
-    0%, 100% { transform: translateX(-50%) scale(1); opacity: .8; }
-    50% { transform: translateX(-50%) scale(1.18); opacity: 1; }
+  .hero h1 {
+    font-size: clamp(2.5rem, 7vw, 4.2rem); font-weight: 800;
+    letter-spacing: -.025em; line-height: 1.08;
   }
-  @media (prefers-reduced-motion: reduce) { .orb { animation: none; } }
-  h1 {
-    position: relative; font-size: clamp(2.4rem, 6vw, 3.6rem);
-    font-weight: 800; letter-spacing: -.02em; line-height: 1.15;
+  .hero h1 .accent {
+    background: linear-gradient(100deg, var(--teal), var(--ice));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  h1 .accent { color: var(--teal); }
-  .sub {
-    position: relative; margin: 18px auto 0; max-width: 560px;
-    font-size: 1.2rem; color: var(--muted);
+  .hero .sub { margin: 20px auto 0; max-width: 520px; font-size: 1.15rem; color: var(--muted); }
+
+  .breath-stage { position: relative; width: 280px; height: 280px; margin: 52px auto 0; }
+  .ring { position: absolute; inset: 0; border-radius: 50%; }
+  .ring.r1 { border: 1px solid rgba(92,200,194,.35); animation: orb var(--breath) ease-in-out infinite; }
+  .ring.r2 { inset: -26px; border: 1px solid rgba(92,200,194,.16); animation: orb var(--breath) ease-in-out infinite; animation-delay: -.35s; }
+  .ring.r3 { inset: -56px; border: 1px solid rgba(127,184,232,.09); animation: orb var(--breath) ease-in-out infinite; animation-delay: -.7s; }
+  .orb-core {
+    position: absolute; inset: 44px; border-radius: 50%;
+    background:
+      radial-gradient(circle at 38% 32%, rgba(255,255,255,.24), transparent 46%),
+      radial-gradient(circle, rgba(92,200,194,.85), rgba(64,140,170,.55) 62%, rgba(30,70,110,.35));
+    box-shadow: 0 0 90px rgba(92,200,194,.35), inset 0 0 40px rgba(255,255,255,.08);
+    animation: orb var(--breath) ease-in-out infinite;
   }
+  @keyframes orb {
+    0%, 100% { transform: scale(.78); }
+    50% { transform: scale(1.06); }
+  }
+  .breath-label {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    font-size: 1.05rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(255,255,255,.92); text-shadow: 0 1px 14px rgba(8,15,28,.6);
+  }
+  .breath-hint { margin-top: 40px; font-size: .85rem; color: var(--muted); letter-spacing: .02em; }
+  .cta-row { margin-top: 26px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
   .cta {
-    position: relative; display: inline-block; margin-top: 30px; padding: 13px 30px;
-    border-radius: 999px; font-weight: 700; font-size: .95rem;
-    color: #0a1220; background: linear-gradient(120deg, var(--teal), var(--ice));
-    box-shadow: 0 10px 34px rgba(92,200,194,.28);
+    display: inline-block; padding: 13px 28px; border-radius: 999px;
+    font-weight: 700; font-size: .95rem; color: #08131f;
+    background: linear-gradient(120deg, var(--teal), var(--ice));
+    box-shadow: 0 12px 40px rgba(92,200,194,.25);
   }
-  .cta-note { position: relative; margin-top: 12px; font-size: .82rem; color: var(--muted); }
-  .hero-shot { position: relative; margin: 48px auto -8px; width: min(320px, 78vw); }
-  .hero-shot img {
-    width: 100%; height: auto; border-radius: 28px;
-    box-shadow: 0 30px 90px rgba(0,0,0,.55), 0 0 0 1px var(--border);
+  .cta-ghost {
+    display: inline-block; padding: 13px 24px; border-radius: 999px; font-weight: 650;
+    font-size: .95rem; color: var(--text); border: 1px solid var(--border);
+    text-decoration: none; background: rgba(255,255,255,.04);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ring, .orb-core { animation: none; }
+    .orb-core { transform: scale(.95); }
   }
 
-  /* ---------- features ---------- */
-  section { padding: 72px 0 0; }
-  .feature {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
-    padding: 40px 0;
+  /* ---------- scroll story : sticky phone ---------- */
+  .story { position: relative; padding: 40px 0 0; }
+  .story-grid { display: grid; grid-template-columns: minmax(300px, 420px) 1fr; gap: clamp(40px, 7vw, 110px); }
+  .phone-col { position: relative; }
+  .phone-sticky { position: sticky; top: calc(50vh - 310px); height: 620px; display: grid; place-items: center; }
+  .phone {
+    position: relative; width: 296px; height: 616px; border-radius: 48px;
+    background: #0b0f18; border: 1px solid rgba(255,255,255,.14);
+    box-shadow: 0 40px 110px rgba(0,0,0,.6), inset 0 0 0 7px #05070c;
+    overflow: hidden;
   }
-  .feature:nth-child(even) .shot { order: -1; }
-  .feature h2 { font-size: clamp(1.5rem, 3.4vw, 2rem); font-weight: 750; letter-spacing: -.01em; }
-  .feature h2 span { color: var(--teal); }
-  .feature.cold h2 span { color: var(--ice); }
-  .feature p { margin-top: 12px; color: var(--muted); font-size: 1.02rem; max-width: 44ch; }
-  .feature .shot { text-align: center; }
-  .feature .shot img {
-    width: min(300px, 70vw); height: auto; border-radius: 26px;
-    box-shadow: 0 24px 70px rgba(0,0,0,.5), 0 0 0 1px var(--border);
+  .phone::before { /* dynamic island */
+    content: ""; position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+    width: 84px; height: 24px; border-radius: 999px; background: #05070c; z-index: 2;
   }
-  .chips { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .phone .screen {
+    position: absolute; inset: 7px; border-radius: 42px; overflow: hidden;
+  }
+  .phone .screen img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    opacity: 0; transition: opacity .55s ease;
+  }
+  .phone .screen img.active { opacity: 1; }
+  .phone-glow {
+    position: absolute; inset: -60px; border-radius: 50%; z-index: -1;
+    background: radial-gradient(circle, rgba(92,200,194,.14), transparent 65%);
+    transition: background 1s ease;
+  }
+  .steps { padding: 6vh 0 10vh; }
+  .step { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; }
+  .step .kicker {
+    font-size: .78rem; font-weight: 750; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 14px;
+  }
+  .step.cold .kicker { color: var(--ice); }
+  .step h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); font-weight: 780; letter-spacing: -.015em; line-height: 1.18; }
+  .step p { margin-top: 16px; color: var(--muted); font-size: 1.06rem; max-width: 46ch; }
+  .chips { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
   .chip {
-    font-size: .8rem; color: var(--text); padding: 6px 12px; border-radius: 999px;
-    background: var(--card); border: 1px solid var(--border);
+    font-size: .8rem; padding: 7px 13px; border-radius: 999px;
+    background: rgba(255,255,255,.055); border: 1px solid var(--border);
   }
-  @media (max-width: 760px) {
-    .feature { grid-template-columns: 1fr; gap: 28px; text-align: center; }
-    .feature:nth-child(even) .shot { order: 0; }
-    .feature p { margin-left: auto; margin-right: auto; }
+  .step .mini-phone { display: none; }
+
+  @media (max-width: 880px) {
+    .story-grid { grid-template-columns: 1fr; }
+    .phone-col { display: none; }
+    .step { min-height: 0; padding: 48px 0; text-align: center; align-items: center; }
+    .step p { margin-left: auto; margin-right: auto; }
     .chips { justify-content: center; }
+    .step .mini-phone {
+      display: block; width: min(240px, 64vw); margin: 34px auto 0;
+      border-radius: 38px; border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 26px 70px rgba(0,0,0,.55); overflow: hidden;
+    }
+    .step .mini-phone img { display: block; width: 100%; height: auto; }
   }
 
-  /* ---------- privacy strip ---------- */
-  .privacy {
-    margin: 88px 0 0; padding: 34px 28px; border-radius: 22px;
-    background: linear-gradient(160deg, rgba(92,200,194,.10), rgba(127,184,232,.06));
-    border: 1px solid var(--border); text-align: center;
+  /* ---------- voice section ---------- */
+  .voice { padding: 14vh 0; text-align: center; position: relative; }
+  .voice .quote {
+    font-size: clamp(1.6rem, 4.5vw, 2.6rem); font-weight: 300; font-style: italic;
+    letter-spacing: -.01em; min-height: 2.6em; display: grid; place-items: center;
+    color: rgba(238,243,251,.92);
   }
-  .privacy h3 { font-size: 1.25rem; font-weight: 750; }
-  .privacy p { margin-top: 8px; color: var(--muted); font-size: .95rem; }
+  .voice .quote span { opacity: 0; transition: opacity 1.2s ease; position: absolute; max-width: 20ch; }
+  .voice .quote span.on { opacity: 1; }
+  .voice .who { margin-top: 8px; font-size: .85rem; color: var(--muted); letter-spacing: .05em; }
+  .voice .langs { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 
-  /* ---------- footer ---------- */
+  /* ---------- privacy / final ---------- */
+  .privacy { padding: 8vh 0 4vh; }
+  .privacy-inner {
+    border-radius: 26px; padding: 44px 32px; text-align: center;
+    background: linear-gradient(165deg, rgba(92,200,194,.09), rgba(127,184,232,.05));
+    border: 1px solid var(--border);
+  }
+  .privacy h3 { font-size: 1.45rem; font-weight: 770; }
+  .privacy p { margin: 10px auto 0; color: var(--muted); max-width: 56ch; }
+  .final { padding: 12vh 0 8vh; text-align: center; }
+  .final h2 { font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 800; letter-spacing: -.02em; }
+
   footer {
-    margin-top: 72px; padding: 36px 0 44px; border-top: 1px solid var(--border);
+    padding: 30px 0 44px; border-top: 1px solid var(--border);
     text-align: center; font-size: .85rem; color: var(--muted); line-height: 2.1;
   }
   footer a { color: var(--teal); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
+
+  /* ---------- reveals ---------- */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <nav>
-    <div class="brand"><img src="icon.png" alt=""> BreatheToo</div>
-    <div class="lang" role="group" aria-label="Language">
-      <button id="lang-en" class="on" onclick="setLang('en')">EN</button>
-      <button id="lang-fr" onclick="setLang('fr')">FR</button>
-    </div>
-  </nav>
+<nav>
+  <div class="brand"><img src="icon.png" alt=""> BreatheToo</div>
+  <div class="lang" role="group" aria-label="Language">
+    <button id="lang-en" class="on" onclick="setLang('en')">EN</button>
+    <button id="lang-fr" onclick="setLang('fr')">FR</button>
+  </div>
+</nav>
 
-  <header>
-    <div class="orb" aria-hidden="true"></div>
-    <h1 data-i18n="heroTitle">Breathe. Hold. <span class="accent">Let&nbsp;go.</span></h1>
-    <p class="sub" data-i18n="heroSub">Guided breathwork and cold exposure, with animated visuals and a voice that carries you through every phase.</p>
+<!-- ============ HERO : breathe with the page ============ -->
+<header class="hero">
+  <h1 data-i18n="heroTitle">Breathe. Hold. <span class="accent">Let&nbsp;go.</span></h1>
+  <p class="sub" data-i18n="heroSub">Guided breathwork and cold exposure, carried by a voice and visuals that let you close your eyes.</p>
+  <div class="breath-stage" aria-hidden="true">
+    <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+    <div class="orb-core"></div>
+    <div class="breath-label" id="breathLabel">Breathe in</div>
+  </div>
+  <div class="breath-hint" data-i18n="breathHint">Follow the circle — you're already practicing.</div>
+  <div class="cta-row">
     <span class="cta" data-i18n="cta">Coming soon to the App&nbsp;Store</span>
-    <div class="cta-note" data-i18n="ctaNote">Free · No ads · No subscription</div>
-    <div class="hero-shot"><img data-shot="03_session" src="shots/en/03_session.png" alt="An active breathing session in BreatheToo" loading="eager"></div>
-  </header>
+    <a class="cta-ghost" href="#story" data-i18n="ctaMore">Discover</a>
+  </div>
+</header>
 
-  <section>
-    <div class="feature">
-      <div>
-        <h2 data-i18n="f1Title">Four techniques.<br><span>Or build your own.</span></h2>
+<!-- ============ STORY : sticky phone ============ -->
+<div class="wrap story" id="story">
+  <div class="story-grid">
+    <div class="phone-col">
+      <div class="phone-sticky">
+        <div class="phone">
+          <div class="phone-glow" id="phoneGlow"></div>
+          <div class="screen" id="phoneScreen">
+            <img data-screen="02_builder" src="screens/en/02_builder.png" alt="" class="active">
+            <img data-screen="03_session" src="screens/en/03_session.png" alt="">
+            <img data-screen="04_cold" src="screens/en/04_cold.png" alt="">
+            <img data-screen="05_progress" src="screens/en/05_progress.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal" data-screen="02_builder">
+        <div class="kicker" data-i18n="k1">Your practice</div>
+        <h2 data-i18n="f1Title">Four techniques. Or&nbsp;build your own.</h2>
         <p data-i18n="f1Body">Power Breathing, cardiac coherence, box breathing and 4-7-8 — every rhythm, round and duration is yours to shape.</p>
         <div class="chips">
           <span class="chip">Power Breathing</span>
@@ -160,97 +258,175 @@
           <span class="chip" data-i18n="chipBox">Box breathing</span>
           <span class="chip">4-7-8</span>
         </div>
+        <div class="mini-phone"><img data-screen="02_builder" src="screens/en/02_builder.png" alt="The session builder" loading="lazy"></div>
       </div>
-      <div class="shot"><img data-shot="02_builder" src="shots/en/02_builder.png" alt="The session builder" loading="lazy"></div>
-    </div>
 
-    <div class="feature">
-      <div>
-        <h2 data-i18n="f2Title">A voice that <span>guides you.</span></h2>
-        <p data-i18n="f2Body">A sensorial voice coach accompanies your breathing and retention — never technical, always present. In 12 languages, with haptics that let you close your eyes.</p>
+      <div class="step reveal" data-screen="03_session">
+        <div class="kicker" data-i18n="k2">In session</div>
+        <h2 data-i18n="f2Title">Close your eyes. The&nbsp;app follows you.</h2>
+        <p data-i18n="f2Body">Animated visuals, haptic guidance and a sensorial voice coach carry you through every breath, retention and recovery — even on the lock screen.</p>
         <div class="chips">
-          <span class="chip" data-i18n="chipLangs">12 languages</span>
-          <span class="chip" data-i18n="chipHaptics">Haptic guidance</span>
           <span class="chip" data-i18n="chipVisuals">Animated visuals</span>
+          <span class="chip" data-i18n="chipHaptics">Haptic guidance</span>
+          <span class="chip" data-i18n="chipLive">Live Activity</span>
         </div>
+        <div class="mini-phone"><img data-screen="03_session" src="screens/en/03_session.png" alt="An active breathing session" loading="lazy"></div>
       </div>
-      <div class="shot"><img data-shot="01_home" src="shots/en/01_home.png" alt="The BreatheToo home screen" loading="lazy"></div>
-    </div>
 
-    <div class="feature cold">
-      <div>
-        <h2 data-i18n="f3Title">Cold, <span>on your terms.</span></h2>
+      <div class="step cold reveal" data-screen="04_cold">
+        <div class="kicker" data-i18n="k3">Cold exposure</div>
+        <h2 data-i18n="f3Title">Cold, on your terms.</h2>
         <p data-i18n="f3Body">Time your cold showers and ice baths, keep your streak alive, and watch your tolerance grow session after session.</p>
+        <div class="mini-phone"><img data-screen="04_cold" src="screens/en/04_cold.png" alt="The cold exposure timer" loading="lazy"></div>
       </div>
-      <div class="shot"><img data-shot="04_cold" src="shots/en/04_cold.png" alt="The cold exposure timer" loading="lazy"></div>
-    </div>
 
-    <div class="feature">
-      <div>
-        <h2 data-i18n="f4Title">See yourself <span>progress.</span></h2>
-        <p data-i18n="f4Body">Retention records, streaks and history at a glance — and every session saved to Apple Health as mindful minutes.</p>
+      <div class="step reveal" data-screen="05_progress">
+        <div class="kicker" data-i18n="k4">Progress</div>
+        <h2 data-i18n="f4Title">See yourself progress.</h2>
+        <p data-i18n="f4Body">Retention records, streaks and history at a glance — every session saved to Apple Health as mindful minutes, synced through iCloud.</p>
         <div class="chips">
           <span class="chip">Apple Health</span>
           <span class="chip" data-i18n="chipIcloud">iCloud sync</span>
         </div>
+        <div class="mini-phone"><img data-screen="05_progress" src="screens/en/05_progress.png" alt="Progress and history" loading="lazy"></div>
       </div>
-      <div class="shot"><img data-shot="05_progress" src="shots/en/05_progress.png" alt="Progress and history" loading="lazy"></div>
     </div>
-  </section>
-
-  <div class="privacy">
-    <h3 data-i18n="privTitle">Private by design</h3>
-    <p data-i18n="privBody">No account required. No tracking, no analytics, no third-party SDKs. Your data lives on your device and your iCloud — nowhere else.</p>
   </div>
-
-  <footer>
-    <a href="https://acroisie.github.io/breathetoo-legal/support" data-i18n="ftSupport">Support</a> ·
-    <a href="https://acroisie.github.io/breathetoo-legal/privacy-policy" data-i18n="ftPrivacy">Privacy Policy</a> ·
-    <a href="mailto:contact@breathetoo.com">contact@breathetoo.com</a><br>
-    © 2026 Arnaud Croisier
-  </footer>
 </div>
 
+<!-- ============ VOICE ============ -->
+<section class="voice wrap">
+  <div class="quote" id="voiceQuote" aria-live="off">
+    <span class="on">“Don’t analyze. Feel.”</span>
+    <span>“One more breath.”</span>
+    <span>“Let everything soften.”</span>
+  </div>
+  <div class="who" data-i18n="voiceWho">— the voice coach, in 12 languages</div>
+  <div class="langs">
+    <span class="chip">Français</span><span class="chip">English</span><span class="chip">Deutsch</span>
+    <span class="chip">Español</span><span class="chip">Italiano</span><span class="chip">日本語</span>
+    <span class="chip">한국어</span><span class="chip">Nederlands</span><span class="chip">Polski</span>
+    <span class="chip">Português</span><span class="chip">中文（简体）</span><span class="chip">中文（繁體）</span>
+  </div>
+</section>
+
+<!-- ============ PRIVACY + FINAL ============ -->
+<div class="wrap privacy reveal">
+  <div class="privacy-inner">
+    <h3 data-i18n="privTitle">Free. Private. No ads.</h3>
+    <p data-i18n="privBody">No account required, no subscription, no tracking, no third-party SDKs. Your data lives on your device and your iCloud — nowhere else.</p>
+  </div>
+</div>
+
+<div class="wrap final reveal">
+  <h2 data-i18n="finalTitle">Your next breath starts&nbsp;here.</h2>
+  <div class="cta-row"><span class="cta" data-i18n="cta">Coming soon to the App&nbsp;Store</span></div>
+</div>
+
+<footer>
+  <a href="https://acroisie.github.io/breathetoo-legal/support" data-i18n="ftSupport">Support</a> ·
+  <a href="https://acroisie.github.io/breathetoo-legal/privacy-policy" data-i18n="ftPrivacy">Privacy Policy</a> ·
+  <a href="mailto:contact@breathetoo.com">contact@breathetoo.com</a><br>
+  © 2026 Arnaud Croisier
+</footer>
+
 <script>
+/* ---------- i18n ---------- */
 const I18N = {
   fr: {
     heroTitle: 'Respire. Retiens. <span class="accent">Relâche.</span>',
-    heroSub: 'Respiration guidée et exposition au froid, avec des visuels animés et une voix qui te porte à chaque phase.',
-    cta: 'Bientôt sur l’App Store',
-    ctaNote: 'Gratuit · Sans pub · Sans abonnement',
-    f1Title: 'Quatre techniques.<br><span>Ou crée la tienne.</span>',
+    heroSub: 'Respiration guidée et exposition au froid, portées par une voix et des visuels qui te laissent fermer les yeux.',
+    breathHint: 'Suis le cercle — tu pratiques déjà.',
+    cta: 'Bientôt sur l’App Store',
+    ctaMore: 'Découvrir',
+    k1: 'Ta pratique', k2: 'En séance', k3: 'Exposition au froid', k4: 'Progression',
+    f1Title: 'Quatre techniques. Ou crée la tienne.',
     f1Body: 'Power Breathing, cohérence cardiaque, respiration carrée et 4-7-8 — chaque rythme, round et durée se règle comme tu veux.',
     chipCoherence: 'Cohérence cardiaque', chipBox: 'Respiration carrée',
-    f2Title: 'Une voix qui <span>te guide.</span>',
-    f2Body: 'Un coach vocal sensoriel accompagne ta respiration et ta rétention — jamais technique, toujours présent. En 12 langues, avec des haptiques qui te laissent fermer les yeux.',
-    chipLangs: '12 langues', chipHaptics: 'Guidage haptique', chipVisuals: 'Visuels animés',
-    f3Title: 'Le froid, <span>à ta mesure.</span>',
+    f2Title: 'Ferme les yeux. L’app te suit.',
+    f2Body: 'Visuels animés, guidage haptique et un coach vocal sensoriel t’accompagnent à chaque respiration, rétention et récupération — même sur l’écran verrouillé.',
+    chipVisuals: 'Visuels animés', chipHaptics: 'Guidage haptique', chipLive: 'Live Activity',
+    f3Title: 'Le froid, à ta mesure.',
     f3Body: 'Chronomètre tes douches froides et bains de glace, entretiens ta série, et regarde ta tolérance grandir séance après séance.',
-    f4Title: 'Regarde-toi <span>progresser.</span>',
-    f4Body: 'Records de rétention, séries et historique en un coup d’œil — et chaque séance enregistrée dans Apple Santé en minutes de pleine conscience.',
+    f4Title: 'Regarde-toi progresser.',
+    f4Body: 'Records de rétention, séries et historique en un coup d’œil — chaque séance enregistrée dans Apple Santé en minutes de pleine conscience, synchronisée par iCloud.',
     chipIcloud: 'Synchro iCloud',
-    privTitle: 'Privé par conception',
-    privBody: 'Aucun compte requis. Pas de tracking, pas d’analytics, pas de SDK tiers. Tes données vivent sur ton appareil et ton iCloud — nulle part ailleurs.',
+    voiceWho: '— le coach vocal, en 12 langues',
+    privTitle: 'Gratuit. Privé. Sans pub.',
+    privBody: 'Aucun compte requis, pas d’abonnement, pas de tracking, pas de SDK tiers. Tes données vivent sur ton appareil et ton iCloud — nulle part ailleurs.',
+    finalTitle: 'Ta prochaine respiration commence ici.',
     ftSupport: 'Support', ftPrivacy: 'Politique de confidentialité',
+    breathIn: 'Inspire', breathOut: 'Expire',
+    quotes: ['« N’analyse pas. Ressens. »', '« Une dernière. »', '« Relâche tout. »'],
   },
-  en: null // source language lives in the markup
+  en: {
+    breathIn: 'Breathe in', breathOut: 'Breathe out',
+    quotes: ['“Don’t analyze. Feel.”', '“One more breath.”', '“Let everything soften.”'],
+  }
 };
 const EN_CACHE = {};
 document.querySelectorAll('[data-i18n]').forEach(el => { EN_CACHE[el.dataset.i18n] = el.innerHTML; });
+let LANG = 'en';
 
 function setLang(lang) {
+  LANG = lang;
   document.documentElement.lang = lang;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
     el.innerHTML = (lang === 'en') ? EN_CACHE[key] : (I18N.fr[key] ?? EN_CACHE[key]);
   });
-  document.querySelectorAll('[data-shot]').forEach(img => {
-    img.src = 'shots/' + lang + '/' + img.dataset.shot + '.png';
+  document.querySelectorAll('img[data-screen]').forEach(img => {
+    img.src = 'screens/' + lang + '/' + img.dataset.screen + '.png';
   });
+  document.querySelectorAll('#voiceQuote span').forEach((s, i) => { s.textContent = I18N[lang].quotes[i]; });
   document.getElementById('lang-en').classList.toggle('on', lang === 'en');
   document.getElementById('lang-fr').classList.toggle('on', lang === 'fr');
 }
 if ((navigator.language || '').toLowerCase().startsWith('fr')) setLang('fr');
+
+/* ---------- breath label, synced with the orb keyframes ---------- */
+const label = document.getElementById('breathLabel');
+const BREATH_MS = 10000;
+function tickBreath() {
+  const t = (performance.now() % BREATH_MS) / BREATH_MS;
+  label.textContent = I18N[LANG]['breath' + (t < .5 ? 'In' : 'Out')] ?? (t < .5 ? 'Breathe in' : 'Breathe out');
+  requestAnimationFrame(tickBreath);
+}
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(tickBreath);
+
+/* ---------- sticky phone screen swap ---------- */
+const screenImgs = document.querySelectorAll('#phoneScreen img');
+const glow = document.getElementById('phoneGlow');
+const GLOWS = {
+  '02_builder': 'radial-gradient(circle, rgba(92,200,194,.16), transparent 65%)',
+  '03_session': 'radial-gradient(circle, rgba(92,200,194,.22), transparent 65%)',
+  '04_cold':    'radial-gradient(circle, rgba(127,184,232,.22), transparent 65%)',
+  '05_progress':'radial-gradient(circle, rgba(92,200,194,.14), transparent 65%)',
+};
+const stepObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const key = e.target.dataset.screen;
+    screenImgs.forEach(img => img.classList.toggle('active', img.dataset.screen === key));
+    glow.style.background = GLOWS[key];
+  });
+}, { rootMargin: '-45% 0px -45% 0px' });
+document.querySelectorAll('.step').forEach(s => stepObserver.observe(s));
+
+/* ---------- reveals ---------- */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObserver.unobserve(e.target); } });
+}, { threshold: .15 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ---------- voice quotes rotation ---------- */
+const quotes = document.querySelectorAll('#voiceQuote span');
+let qi = 0;
+setInterval(() => {
+  quotes[qi].classList.remove('on');
+  qi = (qi + 1) % quotes.length;
+  quotes[qi].classList.add('on');
+}, 4200);
 </script>
 </body>
 </html>
