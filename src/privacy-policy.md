@@ -1,6 +1,6 @@
 # BreatheToo — Privacy Policy
 
-**Last updated: April 15, 2026**
+**Last updated: July 19, 2026**
 
 ## Overview
 
@@ -89,7 +89,7 @@ For more details on managing your data, see our [Privacy Choices](/privacy-choic
 
 ## Children's Privacy
 
-BreatheToo does not knowingly collect data from children under 13. The app does not contain age-restricted content.
+BreatheToo is rated 16+ on the App Store and is not directed at children. We do not knowingly collect personal data from anyone under 16. If you are a parent or guardian and believe a minor is using the app, all data can be removed at any time from the app (Profile > Delete Account) or by uninstalling it.
 
 ## Changes to This Policy
 
