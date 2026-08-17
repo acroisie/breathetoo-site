@@ -110,7 +110,7 @@
   }
   .steps { padding: 6vh 0 10vh; }
   .step { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; }
-  .step .kicker {
+  .step .kicker, .film .kicker {
     font-size: .78rem; font-weight: 750; letter-spacing: .16em; text-transform: uppercase;
     color: var(--teal); margin-bottom: 14px;
   }
@@ -137,6 +137,25 @@
     }
     .step .mini-phone img { display: block; width: 100%; height: auto; }
   }
+
+  /* ---------- film ---------- */
+  .film { padding: 6vh 0 2vh; text-align: center; }
+  .film h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); font-weight: 780; letter-spacing: -.015em; }
+  .film-frame {
+    position: relative; margin: 34px auto 0; max-width: 940px;
+    border-radius: 22px; border: 1px solid var(--border); overflow: hidden;
+    background: #0b0f18; box-shadow: 0 40px 110px rgba(0,0,0,.55);
+  }
+  .film-frame video { display: block; width: 100%; aspect-ratio: 16/9; }
+  .film-play {
+    position: absolute; inset: 0; margin: auto; width: 76px; height: 76px;
+    border-radius: 50%; border: 1px solid rgba(255,255,255,.25); cursor: pointer;
+    background: rgba(13,22,40,.55); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    display: grid; place-items: center; transition: transform .25s ease, background .25s ease;
+  }
+  .film-play:hover { transform: scale(1.06); background: rgba(13,22,40,.75); }
+  .film-play svg { width: 26px; height: 26px; fill: var(--text); margin-left: 4px; }
+  .film-play.hidden { display: none; }
 
   /* ---------- privacy / final ---------- */
   .privacy { padding: 10vh 0 4vh; }
@@ -247,6 +266,20 @@
   </div>
 </div>
 
+<!-- ============ FILM ============ -->
+<div class="wrap film reveal">
+  <div class="kicker" data-i18n="kFilm">In motion</div>
+  <h2 data-i18n="filmTitle">Watch it breathe.</h2>
+  <div class="film-frame">
+    <video id="film" poster="media/reveal-poster.jpg" preload="none" playsinline>
+      <source src="media/reveal.mp4" type="video/mp4">
+    </video>
+    <button class="film-play" id="filmPlay" aria-label="Play the app reveal video">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+  </div>
+</div>
+
 <!-- ============ PRIVACY + FINAL ============ -->
 <div class="wrap privacy reveal">
   <div class="privacy-inner">
@@ -288,6 +321,8 @@ const I18N = {
     f4Title: 'Regarde-toi progresser.',
     f4Body: 'Records de rétention, séries et historique en un coup d’œil — chaque séance enregistrée dans Apple Santé en minutes de pleine conscience, synchronisée par iCloud.',
     chipIcloud: 'Synchro iCloud',
+    kFilm: 'En mouvement',
+    filmTitle: 'Regarde-la respirer.',
     privTitle: 'Gratuit. Privé. Sans pub.',
     privBody: 'Aucun compte requis, pas d’abonnement, pas de tracking, pas de SDK tiers. Tes données vivent sur ton appareil et ton iCloud — nulle part ailleurs.',
     finalTitle: 'Ta prochaine respiration commence ici.',
@@ -331,6 +366,19 @@ const stepObserver = new IntersectionObserver(entries => {
   });
 }, { rootMargin: '-45% 0px -45% 0px' });
 document.querySelectorAll('.step').forEach(s => stepObserver.observe(s));
+
+/* ---------- film ---------- */
+const film = document.getElementById('film');
+const filmPlay = document.getElementById('filmPlay');
+filmPlay.addEventListener('click', () => {
+  film.controls = true;
+  filmPlay.classList.add('hidden');
+  film.play();
+});
+film.addEventListener('ended', () => {
+  film.controls = false;
+  filmPlay.classList.remove('hidden');
+});
 
 /* ---------- reveals ---------- */
 const revealObserver = new IntersectionObserver(entries => {
