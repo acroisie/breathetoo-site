@@ -9,8 +9,11 @@
 <meta property="og:title" content="BreatheToo">
 <meta property="og:description" content="Breathe. Hold. Let go. Guided breathwork and cold exposure — free, private, no ads.">
 <meta property="og:image" content="https://breathetoo.com/icon.png">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#080f1c">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f3f7fa">
 <style>
   :root {
+    color-scheme: dark;
     --bg: #080f1c;
     --bg2: #101b30;
     --text: #eef3fb;
@@ -18,20 +21,49 @@
     --teal: #5cc8c2;
     --ice: #7fb8e8;
     --border: rgba(255,255,255,.09);
+    --surface: rgba(255,255,255,.055);
+    --surface-strong: rgba(255,255,255,.14);
+    --nav-bg: rgba(13,22,40,.55);
+    --shadow-color: rgba(0,0,0,.6);
+    --glow-bg1: rgba(127,184,232,.07);
+    --glow-bg2: rgba(92,200,194,.05);
+    --grain-opacity: .5;
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.02 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      color-scheme: light;
+      --bg: #f3f7fa;
+      --bg2: #e9f0f6;
+      --text: #0e1c2f;
+      --muted: #52657f;
+      --teal: #178f88;
+      --ice: #3579bd;
+      --border: rgba(14,32,58,.13);
+      --surface: rgba(14,50,90,.05);
+      --surface-strong: rgba(14,50,90,.11);
+      --nav-bg: rgba(255,255,255,.6);
+      --shadow-color: rgba(30,60,100,.18);
+      --glow-bg1: rgba(127,184,232,.16);
+      --glow-bg2: rgba(92,200,194,.12);
+      --grain-opacity: .3;
+      --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.02 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background:
-      radial-gradient(90rem 60rem at 70% -10%, rgba(127,184,232,.07), transparent 60%),
-      radial-gradient(80rem 50rem at 10% 40%, rgba(92,200,194,.05), transparent 55%),
+      radial-gradient(90rem 60rem at 70% -10%, var(--glow-bg1), transparent 60%),
+      radial-gradient(80rem 50rem at 10% 40%, var(--glow-bg2), transparent 55%),
       var(--bg);
     color: var(--text); line-height: 1.6; overflow-x: hidden;
   }
   body::after { /* grain */
-    content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .5; z-index: 3;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.02 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+    content: ""; position: fixed; inset: 0; pointer-events: none;
+    opacity: var(--grain-opacity); z-index: 3;
+    background-image: var(--grain);
   }
   .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
   ::selection { background: rgba(92,200,194,.35); }
@@ -41,17 +73,17 @@
     position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 10;
     display: flex; align-items: center; gap: 18px;
     padding: 8px 10px 8px 16px; border-radius: 999px;
-    background: rgba(13,22,40,.55); border: 1px solid var(--border);
+    background: var(--nav-bg); border: 1px solid var(--border);
     backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
   }
   .brand { display: flex; align-items: center; gap: 9px; font-weight: 700; font-size: .95rem; }
   .brand img { width: 26px; height: 26px; border-radius: 7px; }
-  .lang { display: flex; gap: 2px; background: rgba(255,255,255,.06); border-radius: 999px; padding: 2px; }
+  .lang { display: flex; gap: 2px; background: var(--surface); border-radius: 999px; padding: 2px; }
   .lang button {
     background: none; border: none; color: var(--muted); padding: 5px 12px; border-radius: 999px;
     cursor: pointer; font-weight: 650; font-size: .78rem;
   }
-  .lang button.on { background: rgba(255,255,255,.14); color: var(--text); }
+  .lang button.on { background: var(--surface-strong); color: var(--text); }
 
   /* ---------- hero ---------- */
   .hero {
@@ -78,7 +110,7 @@
   .cta-ghost {
     display: inline-block; padding: 13px 24px; border-radius: 999px; font-weight: 650;
     font-size: .95rem; color: var(--text); border: 1px solid var(--border);
-    text-decoration: none; background: rgba(255,255,255,.04);
+    text-decoration: none; background: var(--surface);
   }
   /* ---------- scroll story : sticky phone ---------- */
   .story { position: relative; padding: 40px 0 0; }
@@ -88,7 +120,7 @@
   .phone {
     position: relative; width: 296px; height: 616px; border-radius: 48px;
     background: #0b0f18; border: 1px solid rgba(255,255,255,.14);
-    box-shadow: 0 40px 110px rgba(0,0,0,.6), inset 0 0 0 7px #05070c;
+    box-shadow: 0 40px 110px var(--shadow-color), inset 0 0 0 7px #05070c;
     overflow: hidden;
   }
   .phone::before { /* dynamic island */
@@ -120,7 +152,7 @@
   .chips { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
   .chip {
     font-size: .8rem; padding: 7px 13px; border-radius: 999px;
-    background: rgba(255,255,255,.055); border: 1px solid var(--border);
+    background: var(--surface); border: 1px solid var(--border);
   }
   .step .mini-phone { display: none; }
 
@@ -132,8 +164,8 @@
     .chips { justify-content: center; }
     .step .mini-phone {
       display: block; width: min(240px, 64vw); margin: 34px auto 0;
-      border-radius: 38px; border: 1px solid rgba(255,255,255,.14);
-      box-shadow: 0 26px 70px rgba(0,0,0,.55); overflow: hidden;
+      border-radius: 38px; border: 1px solid var(--border);
+      box-shadow: 0 26px 70px var(--shadow-color); overflow: hidden;
     }
     .step .mini-phone img { display: block; width: 100%; height: auto; }
   }
@@ -144,7 +176,7 @@
   .film-frame {
     position: relative; margin: 34px auto 0; max-width: 940px;
     border-radius: 22px; border: 1px solid var(--border); overflow: hidden;
-    background: #0b0f18; box-shadow: 0 40px 110px rgba(0,0,0,.55);
+    background: #0b0f18; box-shadow: 0 40px 110px var(--shadow-color);
   }
   .film-frame video { display: block; width: 100%; aspect-ratio: 16/9; }
   .film-play {
