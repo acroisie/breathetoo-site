@@ -11,6 +11,7 @@
 <meta property="og:image" content="https://breathetoo.com/icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#080f1c">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f3f7fa">
+<meta name="apple-itunes-app" content="app-id=6792323630">
 <style>
   :root {
     color-scheme: dark;
@@ -106,7 +107,9 @@
     font-weight: 700; font-size: .95rem; color: #08131f;
     background: linear-gradient(120deg, var(--teal), var(--ice));
     box-shadow: 0 12px 40px rgba(92,200,194,.25);
+    text-decoration: none; transition: transform .2s ease;
   }
+  .cta:hover { transform: translateY(-1px); }
   .cta-ghost {
     display: inline-block; padding: 13px 24px; border-radius: 999px; font-weight: 650;
     font-size: .95rem; color: var(--text); border: 1px solid var(--border);
@@ -228,7 +231,7 @@
   <h1 data-i18n="heroTitle">Breathe. Hold. <span class="accent">Let&nbsp;go.</span></h1>
   <p class="sub" data-i18n="heroSub">Guided breathwork and cold exposure, carried by a voice and visuals that let you close your eyes.</p>
   <div class="cta-row">
-    <span class="cta" data-i18n="cta">Coming soon to the App&nbsp;Store</span>
+    <a class="cta" href="https://apps.apple.com/app/id6792323630" data-i18n="cta">Download on the App&nbsp;Store</a>
     <a class="cta-ghost" href="#story" data-i18n="ctaMore">Discover</a>
   </div>
 </header>
@@ -322,7 +325,7 @@
 
 <div class="wrap final reveal">
   <h2 data-i18n="finalTitle">Your next breath starts&nbsp;here.</h2>
-  <div class="cta-row"><span class="cta" data-i18n="cta">Coming soon to the App&nbsp;Store</span></div>
+  <div class="cta-row"><a class="cta" href="https://apps.apple.com/app/id6792323630" data-i18n="cta">Download on the App&nbsp;Store</a></div>
 </div>
 
 <footer>
@@ -338,7 +341,7 @@ const I18N = {
   fr: {
     heroTitle: 'Respire. Retiens. <span class="accent">Relâche.</span>',
     heroSub: 'Respiration guidée et exposition au froid, portées par une voix et des visuels qui te laissent fermer les yeux.',
-    cta: 'Bientôt sur l’App Store',
+    cta: 'Télécharger dans l’App Store',
     ctaMore: 'Découvrir',
     k1: 'Ta pratique', k2: 'En séance', k3: 'Exposition au froid', k4: 'Progression',
     f1Title: 'Quatre techniques. Ou crée la tienne.',
