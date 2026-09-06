@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BreatheToo — For instructors</title>
-<meta name="description" content="Bring your Power Breathing sessions to BreatheToo, a free breathing app with a voice coach in 12 languages. Your profile, your sessions, a link to your workshops. Free for founding instructors.">
+<meta name="description" content="You have students who want a breathing practice at home? BreatheToo is already built: free, on the App Store, and its engine plays any rhythm. Write to me and let's put your own sessions in it.">
 <link rel="icon" href="/icon.png">
 <link rel="canonical" href="https://breathetoo.com/instructors/">
 <meta property="og:title" content="BreatheToo — For instructors">
-<meta property="og:description" content="Your sessions, in your students' pocket. Free for founding instructors.">
+<meta property="og:description" content="Your sessions, in your students' pocket. The app is already built.">
 <meta property="og:image" content="https://breathetoo.com/icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#080f1c">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f3f7fa">
@@ -131,20 +131,6 @@
     background: var(--surface); border: 1px solid var(--border);
   }
 
-  /* cards */
-  .cards { margin-top: 34px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  .card {
-    border-radius: 22px; padding: 26px 24px; border: 1px solid var(--border);
-    background: var(--surface);
-  }
-  .card .icon {
-    width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; margin-bottom: 16px;
-    background: linear-gradient(135deg, rgba(92,200,194,.22), rgba(127,184,232,.14));
-  }
-  .card .icon svg { width: 20px; height: 20px; fill: none; stroke: var(--teal); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-  .card h3 { font-size: 1.12rem; font-weight: 760; letter-spacing: -.01em; }
-  .card p { margin-top: 8px; color: var(--muted); font-size: .98rem; }
-
   /* students : phone + text */
   .students-grid { display: grid; grid-template-columns: 1fr minmax(280px, 380px); gap: clamp(40px, 7vw, 110px); align-items: center; }
   .phone {
@@ -165,37 +151,15 @@
   }
   .phone-wrap { position: relative; }
 
-  /* steps */
-  .how { counter-reset: step; margin-top: 34px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  .how .step {
-    counter-increment: step; border-radius: 22px; padding: 24px 22px 26px;
-    border: 1px solid var(--border); background: var(--surface); position: relative;
-  }
-  .how .step::before {
-    content: counter(step); display: inline-grid; place-items: center;
-    width: 30px; height: 30px; border-radius: 999px; font-weight: 800; font-size: .85rem; color: #08131f;
-    background: linear-gradient(120deg, var(--teal), var(--ice)); margin-bottom: 14px;
-  }
-  .how h3 { font-size: 1.05rem; font-weight: 760; }
-  .how p { margin-top: 6px; color: var(--muted); font-size: .95rem; }
-  .status {
-    margin-top: 22px; display: inline-flex; align-items: center; gap: 10px;
-    padding: 9px 16px 9px 12px; border-radius: 999px; font-size: .88rem;
-    background: var(--surface); border: 1px solid var(--border); color: var(--muted);
-  }
-  .status i { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px rgba(92,200,194,.18); }
-
   /* rules */
   .rules-inner {
     margin-top: 34px; border-radius: 26px; padding: 40px 32px;
     background: linear-gradient(165deg, rgba(92,200,194,.09), rgba(127,184,232,.05));
     border: 1px solid var(--border);
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px;
   }
   .rule h3 { font-size: 1.08rem; font-weight: 770; }
   .rule p { margin-top: 8px; color: var(--muted); font-size: .96rem; }
-  .rule a { color: var(--teal); text-decoration: none; }
-  .rule a:hover { text-decoration: underline; }
 
   /* final */
   .final { padding: 12vh 0 8vh; text-align: center; }
@@ -215,7 +179,7 @@
   @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
   @media (max-width: 880px) {
-    .cards, .how, .rules-inner { grid-template-columns: 1fr; }
+    .rules-inner { grid-template-columns: 1fr; }
     .students-grid { grid-template-columns: 1fr; text-align: center; }
     .students-grid .lead, .students-grid h2 { margin-left: auto; margin-right: auto; }
     .students-grid .chips { justify-content: center; }
@@ -238,63 +202,27 @@
 <header class="hero">
   <div class="kicker" data-i18n="kHero">For instructors</div>
   <h1 data-i18n="heroTitle">Your sessions, in your students' <span class="accent">pocket.</span></h1>
-  <p class="sub" data-i18n="heroSub">BreatheToo is a free breathing app with a voice coach in 12 languages. Bring your own Power Breathing sessions, and give your students a way to practise between two workshops.</p>
+  <p class="sub" data-i18n="heroSub">You have students you'd like to offer a breathing practice to? The app is already built: free, on the App Store, with an engine that plays any rhythm. I can help you put your own sessions in it.</p>
   <div class="cta-row">
-    <a class="cta" href="mailto:contact@breathetoo.com?subject=BreatheToo%20Instructor" data-i18n="cta">Join the founding cohort</a>
-    <a class="cta-ghost" href="#how" data-i18n="ctaMore">How it works</a>
+    <a class="cta" href="mailto:contact@breathetoo.com?subject=BreatheToo%20Instructor" data-i18n="cta">Write to me</a>
+    <a class="cta-ghost" href="/" data-i18n="ctaMore">See the app</a>
   </div>
 </header>
 
-<!-- ============ WHY ============ -->
-<section class="reveal">
-  <div class="wrap">
-    <div class="kicker" data-i18n="k1">Between two workshops</div>
-    <h2 data-i18n="s1Title">They leave motivated. Then&nbsp;what?</h2>
-    <p data-i18n="s1Body">After a workshop, your students go home with a technique and no tool. BreatheToo gives them a free, guided practice they can open every morning, and gives you a place in it.</p>
-  </div>
-</section>
-
-<!-- ============ WHAT YOU GET ============ -->
-<section class="reveal">
-  <div class="wrap">
-    <div class="kicker" data-i18n="k2">What you get</div>
-    <h2 data-i18n="s2Title">A profile, your sessions, and the&nbsp;numbers.</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-        <h3 data-i18n="c1Title">A profile and your sessions</h3>
-        <p data-i18n="c1Body">Your name, your bio, your credentials in your own words, and the sessions you design: rhythm, rounds, retention, recovery.</p>
-      </div>
-      <div class="card">
-        <div class="icon"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div>
-        <h3 data-i18n="c2Title">A link to your workshops</h3>
-        <p data-i18n="c2Body">Every profile points to where you teach. When a student wants more than an app, they find you.</p>
-      </div>
-      <div class="card">
-        <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M7 16V9"/><path d="M12 16V5"/><path d="M17 16v-6"/></svg></div>
-        <h3 data-i18n="c3Title">The numbers, every month</h3>
-        <p data-i18n="c3Body">Profile views, session plays, taps to your workshops. You see exactly what BreatheToo brings you.</p>
-      </div>
-    </div>
-    <div class="chips">
-      <span class="chip" data-i18n="chipFree">Free for founding instructors, for life</span>
-      <span class="chip" data-i18n="chipNoFees">No fees, no commission</span>
-      <span class="chip" data-i18n="chipNoAds">No ads</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============ STUDENTS ============ -->
+<!-- ============ THE APP EXISTS ============ -->
 <section class="reveal">
   <div class="wrap students-grid">
     <div>
-      <div class="kicker" data-i18n="k3">In their hands</div>
-      <h2 data-i18n="s3Title">A guided practice that follows&nbsp;them.</h2>
-      <p class="lead" data-i18n="s3Body">Your session, carried by animated visuals, haptic guidance and a voice coach in their language. They close their eyes; the app does the rest.</p>
+      <div class="kicker" data-i18n="k1">Already built</div>
+      <h2 data-i18n="s1Title">Coded, published, in your students' hands.</h2>
+      <p class="lead" data-i18n="s1Body">BreatheToo has been on the App Store since August 2026. Free, no ads, no account. Twelve languages. Its engine plays every kind of breathing: Power Breathing, cardiac coherence, box breathing, 4-7-8, or any rhythm you build yourself, with your own rounds and retention.</p>
+      <p class="lead" data-i18n="s1Body2">Your students close their eyes: animated visuals, haptic guidance, and for Power Breathing a voice coach in their language.</p>
       <div class="chips">
-        <span class="chip" data-i18n="chipVoice">Voice coach in 12 languages</span>
-        <span class="chip" data-i18n="chipNoAccount">No account required</span>
-        <span class="chip" data-i18n="chipNoTracking">No tracking</span>
+        <span class="chip">Power Breathing</span>
+        <span class="chip" data-i18n="chipCoherence">Cardiac coherence</span>
+        <span class="chip" data-i18n="chipBox">Box breathing</span>
+        <span class="chip">4-7-8</span>
+        <span class="chip" data-i18n="chipCustom">Any rhythm you build</span>
       </div>
     </div>
     <div class="phone-wrap">
@@ -306,59 +234,29 @@
   </div>
 </section>
 
-<!-- ============ HOW ============ -->
-<section class="reveal" id="how">
+<!-- ============ WHAT I PROPOSE ============ -->
+<section class="reveal">
   <div class="wrap">
-    <div class="kicker" data-i18n="k4">How it works</div>
-    <h2 data-i18n="s4Title">Four steps, no paperwork.</h2>
-    <div class="how">
-      <div class="step">
-        <h3 data-i18n="h1Title">Write to me</h3>
-        <p data-i18n="h1Body">A few lines: who you are, where you teach, a link to your site or your page.</p>
-      </div>
-      <div class="step">
-        <h3 data-i18n="h2Title">I build it with you</h3>
-        <p data-i18n="h2Body">A 20-minute call, then your profile and your first session, hand-built together.</p>
-      </div>
-      <div class="step">
-        <h3 data-i18n="h3Title">Your students practise</h3>
-        <p data-i18n="h3Body">You tell them once. The app does the rest, in their language, every morning.</p>
-      </div>
-      <div class="step">
-        <h3 data-i18n="h4Title">You see the numbers</h3>
-        <p data-i18n="h4Body">Every month, an email with what the app brought you. No dashboard to check.</p>
-      </div>
-    </div>
-    <div class="status"><i></i><span data-i18n="status">I'm building instructor sessions now, with a small founding cohort. The app already shows the door.</span></div>
+    <div class="kicker" data-i18n="k2">What I propose</div>
+    <h2 data-i18n="s2Title">Your sessions, under your name, in the&nbsp;app.</h2>
+    <p data-i18n="s2Body">You design the session: the rhythm, the rounds, the retention. It appears in the app with your name, and your students find it at home, in their language.</p>
+    <p data-i18n="s2Body2">This part of the app does not exist yet. It will be built with the first instructors who write to me, and shaped by talking with them.</p>
   </div>
 </section>
 
-<!-- ============ ASK ============ -->
+<!-- ============ CLEAR FROM THE START ============ -->
 <section class="reveal">
   <div class="wrap">
-    <div class="kicker" data-i18n="k5">What I ask</div>
-    <h2 data-i18n="s5Title">One or two sessions, your&nbsp;way.</h2>
-    <p data-i18n="s5Body">Honest feedback while I build. A word to your students when your session goes live. That's all: no exclusivity, no commitment, and you can leave whenever you like.</p>
-  </div>
-</section>
-
-<!-- ============ RULES ============ -->
-<section class="reveal">
-  <div class="wrap">
-    <div class="kicker ice" data-i18n="k6">My rules</div>
-    <h2 data-i18n="s6Title">Clear from day one.</h2>
+    <div class="kicker ice" data-i18n="k3">Clear from the start</div>
+    <h2 data-i18n="s3Title">Two things you can count&nbsp;on.</h2>
     <div class="rules-inner">
       <div class="rule">
-        <h3 data-i18n="r1Title">Your sessions are yours</h3>
-        <p data-i18n="r1Body">They carry your name and BreatheToo's vocabulary: Power Breathing. I use no third-party trademark, badge or logo. Your credentials are written by you, in your words.</p>
+        <h3 data-i18n="r1Title">Your sessions stay yours.</h3>
+        <p data-i18n="r1Body">They carry your name. Your credentials are written by you, in your words.</p>
       </div>
       <div class="rule">
-        <h3 data-i18n="r2Title">Independent</h3>
-        <p data-i18n="r2Body">BreatheToo is not affiliated with any certification body and carries no third-party brand. If you hold a certification, read your own instructor terms before joining: you stay responsible for them.</p>
-      </div>
-      <div class="rule">
-        <h3 data-i18n="r3Title">Free, for everyone</h3>
-        <p data-i18n="r3Body">Your students pay nothing. Founding instructors pay nothing, ever. No ads, no tracking, no data sold. The same promise the app makes to everyone.</p>
+        <h3 data-i18n="r2Title">BreatheToo is independent.</h3>
+        <p data-i18n="r2Body">No third-party brand, no certification body behind it. If you are certified, you stay responsible for your own instructor terms.</p>
       </div>
     </div>
   </div>
@@ -366,9 +264,9 @@
 
 <!-- ============ FINAL ============ -->
 <div class="wrap final reveal">
-  <h2 data-i18n="finalTitle">Bring your <span class="accent">sessions.</span></h2>
-  <p data-i18n="finalBody">Tell me who you are, where you teach, and where to find you. I'm Arnaud, the one developer behind BreatheToo, and I reply within a few days.</p>
-  <div class="cta-row"><a class="cta" href="mailto:contact@breathetoo.com?subject=BreatheToo%20Instructor" data-i18n="ctaFinal">Write to contact@breathetoo.com</a></div>
+  <h2 data-i18n="finalTitle">Write to <span class="accent">me.</span></h2>
+  <p data-i18n="finalBody">Tell me who you are and where you teach. I'm Arnaud, the one developer behind BreatheToo, and we'll talk it through.</p>
+  <div class="cta-row"><a class="cta" href="mailto:contact@breathetoo.com?subject=BreatheToo%20Instructor">contact@breathetoo.com</a></div>
 </div>
 
 <footer>
@@ -385,54 +283,26 @@ const I18N = {
   fr: {
     kHero: 'Pour les instructeurs',
     heroTitle: 'Tes séances, dans la poche de <span class="accent">tes élèves.</span>',
-    heroSub: 'BreatheToo est une app de respiration gratuite avec un coach vocal en 12 langues. Apporte tes propres séances de Power Breathing, et donne à tes élèves de quoi pratiquer entre deux stages.',
-    cta: 'Rejoindre la cohorte fondatrice',
-    ctaMore: 'Comment ça marche',
-    k1: 'Entre deux stages',
-    s1Title: 'Ils repartent motivés. Et&nbsp;ensuite&nbsp;?',
-    s1Body: 'Après un stage, tes élèves rentrent chez eux avec une technique et sans outil. BreatheToo leur donne une pratique guidée, gratuite, à ouvrir chaque matin, et te donne une place dedans.',
-    k2: 'Ce que tu y gagnes',
-    s2Title: 'Un profil, tes séances, et les&nbsp;chiffres.',
-    c1Title: 'Un profil et tes séances',
-    c1Body: 'Ton nom, ta bio, tes diplômes avec tes mots, et les séances que tu conçois : rythme, rounds, rétention, récupération.',
-    c2Title: 'Un lien vers tes stages',
-    c2Body: 'Chaque profil renvoie là où tu enseignes. Quand un élève veut plus qu’une app, il te trouve.',
-    c3Title: 'Les chiffres, chaque mois',
-    c3Body: 'Vues de ton profil, lectures de tes séances, clics vers tes stages. Tu vois exactement ce que BreatheToo t’apporte.',
-    chipFree: 'Gratuit à vie pour les instructeurs fondateurs',
-    chipNoFees: 'Ni frais, ni commission',
-    chipNoAds: 'Sans pub',
-    k3: 'Entre leurs mains',
-    s3Title: 'Une pratique guidée qui les&nbsp;suit.',
-    s3Body: 'Ta séance, portée par des visuels animés, un guidage haptique et un coach vocal dans leur langue. Ils ferment les yeux ; l’app fait le reste.',
-    chipVoice: 'Coach vocal en 12 langues',
-    chipNoAccount: 'Aucun compte requis',
-    chipNoTracking: 'Pas de tracking',
-    k4: 'Comment ça marche',
-    s4Title: 'Quatre étapes, zéro paperasse.',
-    h1Title: 'Écris-moi',
-    h1Body: 'Quelques lignes : qui tu es, où tu enseignes, un lien vers ton site ou ta page.',
-    h2Title: 'Je construis avec toi',
-    h2Body: 'Une visio de 20 minutes, puis ton profil et ta première séance, montés ensemble à la main.',
-    h3Title: 'Tes élèves pratiquent',
-    h3Body: 'Tu leur dis une fois. L’app fait le reste, dans leur langue, chaque matin.',
-    h4Title: 'Tu vois les chiffres',
-    h4Body: 'Chaque mois, un mail avec ce que l’app t’a apporté. Aucun tableau de bord à surveiller.',
-    status: 'Je construis les séances d’instructeurs en ce moment, avec une petite cohorte fondatrice. L’app montre déjà la porte.',
-    k5: 'Ce que je te demande',
-    s5Title: 'Une ou deux séances, à ta&nbsp;façon.',
-    s5Body: 'Un avis franc pendant que je construis. Un mot à tes élèves quand ta séance est en ligne. C’est tout : pas d’exclusivité, pas d’engagement, et tu pars quand tu veux.',
-    k6: 'Mes règles du jeu',
-    s6Title: 'Clair dès le premier jour.',
-    r1Title: 'Tes séances sont à toi',
-    r1Body: 'Elles portent ton nom et le vocabulaire de BreatheToo : Power Breathing. Je n’utilise aucune marque, badge ou logo tiers. Tes diplômes, c’est toi qui les écris, avec tes mots.',
-    r2Title: 'Indépendant',
-    r2Body: 'BreatheToo n’est affilié à aucun organisme de certification et ne porte aucune marque tierce. Si tu es certifié, lis tes propres conditions d’instructeur avant de me rejoindre : tu en restes responsable.',
-    r3Title: 'Gratuit, pour tout le monde',
-    r3Body: 'Tes élèves ne paient rien. Les instructeurs fondateurs ne paient rien, jamais. Sans pub, sans tracking, sans revente de données. La promesse que l’app fait à chacun.',
-    finalTitle: 'Apporte tes <span class="accent">séances.</span>',
-    finalBody: 'Dis-moi qui tu es, où tu enseignes, et où te trouver. Je suis Arnaud, seul développeur derrière BreatheToo, et je réponds sous quelques jours.',
-    ctaFinal: 'Écrire à contact@breathetoo.com',
+    heroSub: 'Tu as des élèves à qui tu veux proposer une respiration ? L’app est déjà faite : gratuite, sur l’App Store, avec un moteur qui joue n’importe quel rythme. Je peux t’aider à y mettre tes propres séances.',
+    cta: 'Écris-moi',
+    ctaMore: 'Voir l’app',
+    k1: 'Déjà faite',
+    s1Title: 'Codée, publiée, dans les mains de tes élèves.',
+    s1Body: 'BreatheToo est sur l’App Store depuis août 2026. Gratuite, sans pub, sans compte. Douze langues. Son moteur joue tous les types de respiration : Power Breathing, cohérence cardiaque, respiration carrée, 4-7-8, ou n’importe quel rythme que tu construis toi-même, avec tes rounds et ta rétention.',
+    s1Body2: 'Tes élèves ferment les yeux : visuels animés, guidage haptique, et pour le Power Breathing un coach vocal dans leur langue.',
+    chipCoherence: 'Cohérence cardiaque', chipBox: 'Respiration carrée', chipCustom: 'Le rythme que tu construis',
+    k2: 'Ce que je te propose',
+    s2Title: 'Tes séances, sous ton nom, dans l’app.',
+    s2Body: 'Tu conçois la séance : le rythme, les rounds, la rétention. Elle apparaît dans l’app avec ton nom, et tes élèves la retrouvent chez eux, dans leur langue.',
+    s2Body2: 'Cette partie de l’app n’existe pas encore. Elle se construira avec les premiers instructeurs qui m’écrivent, en discutant avec eux.',
+    k3: 'Clair dès le départ',
+    s3Title: 'Deux choses sur lesquelles tu peux compter.',
+    r1Title: 'Tes séances restent les tiennes.',
+    r1Body: 'Elles portent ton nom. Tes diplômes, c’est toi qui les écris, avec tes mots.',
+    r2Title: 'BreatheToo est indépendant.',
+    r2Body: 'Aucune marque tierce, aucun organisme de certification derrière. Si tu es certifié, tu restes responsable de tes propres conditions d’instructeur.',
+    finalTitle: 'Écris-<span class="accent">moi.</span>',
+    finalBody: 'Dis-moi qui tu es et où tu enseignes. Je suis Arnaud, seul développeur derrière BreatheToo, et on en discute.',
     ftHome: 'Accueil', ftSupport: 'Support', ftPrivacy: 'Politique de confidentialité',
   },
 };
