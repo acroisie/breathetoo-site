@@ -203,6 +203,9 @@
   .privacy p { margin: 10px auto 0; color: var(--muted); max-width: 56ch; }
   .final { padding: 12vh 0 8vh; text-align: center; }
   .final h2 { font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 800; letter-spacing: -.02em; }
+  .final .teach { margin-top: 26px; font-size: .95rem; color: var(--muted); }
+  .final .teach a { color: var(--teal); text-decoration: none; }
+  .final .teach a:hover { text-decoration: underline; }
 
   footer {
     padding: 30px 0 44px; border-top: 1px solid var(--border);
@@ -326,9 +329,11 @@
 <div class="wrap final reveal">
   <h2 data-i18n="finalTitle">Your next breath starts&nbsp;here.</h2>
   <div class="cta-row"><a class="cta" href="https://apps.apple.com/app/id6792323630" data-i18n="cta">Download on the App&nbsp;Store</a></div>
+  <p class="teach" data-i18n="teach">You teach breathing? <a href="/instructors">Bring your sessions to BreatheToo</a></p>
 </div>
 
 <footer>
+  <a href="/instructors" data-i18n="ftInstructors">Instructors</a> ·
   <a href="/support" data-i18n="ftSupport">Support</a> ·
   <a href="/privacy-policy" data-i18n="ftPrivacy">Privacy Policy</a> ·
   <a href="mailto:contact@breathetoo.com">contact@breathetoo.com</a><br>
@@ -361,7 +366,8 @@ const I18N = {
     privTitle: 'Gratuit. Privé. Sans pub.',
     privBody: 'Aucun compte requis, pas d’abonnement, pas de tracking, pas de SDK tiers. Tes données vivent sur ton appareil et ton iCloud — nulle part ailleurs.',
     finalTitle: 'Ta prochaine respiration commence ici.',
-    ftSupport: 'Support', ftPrivacy: 'Politique de confidentialité',
+    teach: 'Tu enseignes la respiration ? <a href="/instructors">Apporte tes séances à BreatheToo</a>',
+    ftInstructors: 'Instructeurs', ftSupport: 'Support', ftPrivacy: 'Politique de confidentialité',
   },
 };
 const EN_CACHE = {};
