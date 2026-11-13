@@ -1,6 +1,6 @@
 # BreatheToo — Privacy Policy
 
-**Last updated: July 19, 2026**
+**Last updated: November 13, 2026**
 
 ## Overview
 
@@ -21,7 +21,9 @@ BreatheToo is a breathing and cold exposure training app developed by Arnaud Cro
 | Data | When | Storage |
 |---|---|---|
 | **Mindful minutes** | After each breathing session (if Apple Health enabled) | Apple Health on device + iCloud |
-| **Cold exposure** | After each cold session (if Apple Health enabled) | Apple Health on device + iCloud |
+| **Cold exposure workouts** | After each cold session (if Apple Health enabled), with the water temperature you entered | Apple Health on device + iCloud |
+
+BreatheToo writes to Apple Health only if you allow it. Breathing sessions are written as mindful minutes. Cold exposure sessions are written as workouts (Preparation and Recovery), with the water temperature you entered, and never for outdoor sessions. Each entry is linked to its session: if you delete or edit a session in BreatheToo, the app deletes or updates the Health entries it wrote. Entries written by versions before 1.2 are not linked and stay in Health until you remove them there.
 
 We do **not** read any health data from other apps.
 
