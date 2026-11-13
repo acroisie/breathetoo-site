@@ -20,7 +20,7 @@ BreatheToo is designed with privacy at its core. All your data stays on your dev
 
 | Choice | How | What happens |
 |---|---|---|
-| **Enable Apple Health** | Profile tab > Connect Apple Health | BreatheToo writes mindful minutes and cold exposure sessions to Apple Health. |
+| **Enable Apple Health** | Profile tab > Connect Apple Health | BreatheToo writes breathing sessions as mindful minutes and cold exposure sessions as workouts, with the water temperature you entered (not for outdoor sessions). Each entry is linked to its session: deleting or editing a session in the app deletes or updates the Health entries it wrote. |
 | **Manage Apple Health access** | Health app > Sharing > Apps > BreatheToo | Turn writing off or on at any time. Existing Health data is not deleted (managed by Apple Health). |
 
 ### Session Data
